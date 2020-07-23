@@ -12,14 +12,14 @@ Promise.all([
 
 function startVideo() {
     // form WebCam
-    // navigator.getUserMedia(
-    //     { video:{} },
-    //     stream => video.srcObject = stream,
-    //     err => console.error(err)
-    // )
+    navigator.getUserMedia(
+        { video:{} },
+        stream => video.srcObject = stream,
+        err => console.error(err)
+    )
 
     // form Video Source
-    video.src = '../video/lorde.mp4'
+    // video.src = '../video/lorde.mp4'
 }
 
 video.addEventListener('play', () => {
@@ -33,6 +33,7 @@ video.addEventListener('play', () => {
         const resizedDetections = faceapi.resizeResults(detections, displaySize)
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
         faceapi.draw.drawDetections(canvas, resizedDetections)
-        //faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+        //faceapi.draw.drawFaceExpressions(canvas, resizedDetections) //if you need expression detection
+        //faceapi.draw.drawFaceLandmarks(canvas, resizedDetections) //if you need facial landmarks detection
     }, 100)
 })
