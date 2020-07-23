@@ -11,18 +11,18 @@ Promise.all([
 })
 
 function startVideo() {
+    // form WebCam
     // navigator.getUserMedia(
     //     { video:{} },
     //     stream => video.srcObject = stream,
     //     err => console.error(err)
     // )
 
+    // form Video Source
     video.src = '../video/lorde.mp4'
-    console.log('video added')
 }
 
 video.addEventListener('play', () => {
-    console.log('play')
     const canvas = faceapi.createCanvasFromMedia(video)
     document.body.append(canvas)
     const displaySize = { width: video.width, height: video.height }
@@ -30,7 +30,6 @@ video.addEventListener('play', () => {
 
     setInterval(async () => {
         const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
-
         const resizedDetections = faceapi.resizeResults(detections, displaySize)
         canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
         faceapi.draw.drawDetections(canvas, resizedDetections)
